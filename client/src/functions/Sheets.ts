@@ -7,7 +7,7 @@ export class Sheets {
     this.sheetName = sheetName;
   }
 
-  public getSheetAllDataByList() {
+  public getAllValuesBySheet() {
     return new Promise<string>((resolve, reject) => {
       google.script.run
         .withSuccessHandler((result) => {
@@ -16,11 +16,32 @@ export class Sheets {
         .withFailureHandler((error) => {
           reject(error);
         })
-        .getSheetAllData(this.sheetId, this.sheetName);
+        .getAllValuesBySheet(this.sheetId, this.sheetName);
     });
   }
 
-  public testReturn() {
-    return this.sheetId;
+  public getValuesBySheet(
+    row: number,
+    column: number,
+    numRows: number = 1,
+    numColumns: number = 1
+  ) {
+    return new Promise<string>((resolve, reject) => {
+      google.script.run
+        .withSuccessHandler((result) => {
+          resolve(result);
+        })
+        .withFailureHandler((error) => {
+          reject(error);
+        })
+        .getValuesBySheet(
+          this.sheetId,
+          this.sheetName,
+          row,
+          column,
+          numRows,
+          numColumns
+        );
+    });
   }
 }

@@ -6,7 +6,7 @@ function App() {
   const ss = new Sheets("1Ak4WKTiBghdClIAyWsofq3JEhRimsuWtwyDrKXxFUhQ", "日記");
 
   async function getSheet() {
-    setCount(await ss.getSheetAllDataByList());
+    setCount(await ss.getAllValuesBySheet());
   }
 
   return (
