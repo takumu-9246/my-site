@@ -1,14 +1,18 @@
 import { useState } from "react";
+import { Sheets } from "./functions/Sheets";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState("");
+  const ss = new Sheets("1Ak4WKTiBghdClIAyWsofq3JEhRimsuWtwyDrKXxFUhQ", "日記");
+
+  async function getSheet() {
+    setCount(await ss.getSheetAllDataByList());
+  }
 
   return (
     <>
       <div>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+        <button onClick={() => getSheet()}>count is {count}</button>
       </div>
     </>
   );
