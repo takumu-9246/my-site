@@ -8,10 +8,11 @@ export class Sheets {
   }
 
   public getAllValuesBySheet() {
-    return new Promise<string>((resolve, reject) => {
+    return new Promise<Array<string>>((resolve, reject) => {
       google.script.run
         .withSuccessHandler((result) => {
           resolve(result);
+          console.log(result);
         })
         .withFailureHandler((error) => {
           reject(error);
