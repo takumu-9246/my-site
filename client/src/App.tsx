@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Sheets } from "./functions/Sheets";
+import DataTable from "./components/DataTable";
 
 function App() {
   const [count, setCount] = useState([""]);
@@ -14,6 +15,9 @@ function App() {
     <>
       <div>
         <button onClick={() => getSheet()}>count is {count}</button>
+      </div>
+      <div>
+        <DataTable />
       </div>
     </>
   );
