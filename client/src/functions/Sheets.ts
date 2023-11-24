@@ -8,7 +8,7 @@ export class Sheets {
   }
 
   public getAllValuesBySheet() {
-    return new Promise<Array<string>>((resolve, reject) => {
+    return new Promise<string[][]>((resolve, reject) => {
       google.script.run
         .withSuccessHandler((result) => {
           resolve(result);

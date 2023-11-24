@@ -6,22 +6,30 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-export default function DynamicTable() {
+// function test() {
+//   return <TableRow></TableRow>;
+// }
+
+type TableProps = {
+  columns: string[];
+};
+
+export const DynamicTable = (props: TableProps) => {
+  let tableColumns = props.columns.map((content, index) => {
+    return <TableCell key={index}>{content}</TableCell>;
+  });
+  // let tableData = data.map((content, index) => {
+  //   return <TableCell key={index}>{content}</TableCell>;
+  // });
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-          </TableRow>
+          <TableRow>{tableColumns}</TableRow>
         </TableHead>
-        <TableBody>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell>Dessert (100g serving)</TableCell>
-          </TableRow>
-        </TableBody>
+        <TableBody>{/* <TableRow>{tableData}</TableRow> */}</TableBody>
       </Table>
     </TableContainer>
   );
-}
+};

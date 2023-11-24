@@ -1,15 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sheets } from "./functions/Sheets";
-import DataTable from "./components/DataTable";
+import { DynamicTable } from "./components/DataTable";
+import { convertToDictionary } from "./functions/utils";
+
+// interface Dict {
+//   [key: string]: string;
+// }
 
 function App() {
-  const [count, setCount] = useState([""]);
+  const [count, setCount] = useState<string[][]>();
+  const [tablecolumns, setTablecolumns] = useState<string[]>([]);
+  // const [tabledata, setTabledata] = useState<Dict[]>([]);
+  let output: { [k: string]: string }[] = [];
   const ss = new Sheets("1Ak4WKTiBghdClIAyWsofq3JEhRimsuWtwyDrKXxFUhQ", "日記");
 
   async function getSheet() {
     setCount(await ss.getAllValuesBySheet());
-    console.log(count);
   }
+
+  useEffect(() => {
+    if (count) {
+      output = convertToDictionary(count as string[][]);
+      setTablecolumns(Object.keys(output[0]));
+      // setTabledata(output.slice(1));
+    }
+  }, [count]);
 
   return (
     <>
@@ -17,7 +32,7 @@ function App() {
         <button onClick={() => getSheet()}>count is {count}</button>
       </div>
       <div>
-        <DataTable />
+        <DynamicTable columns={tablecolumns} />
       </div>
     </>
   );
