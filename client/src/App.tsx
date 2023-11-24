@@ -1,38 +1,31 @@
 import { useState, useEffect } from "react";
 import { Sheets } from "./functions/Sheets";
 import { DynamicTable } from "./components/DataTable";
-import { convertToDictionary } from "./functions/utils";
-
-// interface Dict {
-//   [key: string]: string;
-// }
 
 function App() {
-  const [count, setCount] = useState<string[][]>();
+  const [spreaddata, setSpreadData] = useState<string[][]>([[]]);
   const [tablecolumns, setTablecolumns] = useState<string[]>([]);
-  // const [tabledata, setTabledata] = useState<Dict[]>([]);
-  let output: { [k: string]: string }[] = [];
+  const [tabledata, setTabledata] = useState<string[][]>([[]]);
   const ss = new Sheets("1Ak4WKTiBghdClIAyWsofq3JEhRimsuWtwyDrKXxFUhQ", "日記");
 
   async function getSheet() {
-    setCount(await ss.getAllValuesBySheet());
+    setSpreadData(await ss.getAllValuesBySheet());
   }
 
   useEffect(() => {
-    if (count) {
-      output = convertToDictionary(count as string[][]);
-      setTablecolumns(Object.keys(output[0]));
-      // setTabledata(output.slice(1));
+    if (spreaddata) {
+      setTablecolumns(spreaddata[0]);
+      setTabledata(spreaddata.slice(1));
     }
-  }, [count]);
+  }, [spreaddata]);
 
   return (
     <>
       <div>
-        <button onClick={() => getSheet()}>count is {count}</button>
+        <button onClick={() => getSheet()}>get spreadsheet data</button>
       </div>
       <div>
-        <DynamicTable columns={tablecolumns} />
+        <DynamicTable columns={tablecolumns} data={tabledata} />
       </div>
     </>
   );

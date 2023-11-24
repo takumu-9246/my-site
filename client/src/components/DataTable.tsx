@@ -6,21 +6,24 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-// function test() {
-//   return <TableRow></TableRow>;
-// }
-
 type TableProps = {
   columns: string[];
+  data: string[][];
 };
 
 export const DynamicTable = (props: TableProps) => {
   let tableColumns = props.columns.map((content, index) => {
     return <TableCell key={index}>{content}</TableCell>;
   });
-  // let tableData = data.map((content, index) => {
-  //   return <TableCell key={index}>{content}</TableCell>;
-  // });
+  let tableData = props.data.map((row, index) => {
+    return (
+      <TableRow key={index}>
+        {row.map((content) => {
+          return <TableCell>{content}</TableCell>;
+        })}
+      </TableRow>
+    );
+  });
 
   return (
     <TableContainer component={Paper}>
@@ -28,7 +31,7 @@ export const DynamicTable = (props: TableProps) => {
         <TableHead>
           <TableRow>{tableColumns}</TableRow>
         </TableHead>
-        <TableBody>{/* <TableRow>{tableData}</TableRow> */}</TableBody>
+        <TableBody>{tableData}</TableBody>
       </Table>
     </TableContainer>
   );
