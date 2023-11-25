@@ -25,7 +25,11 @@ function App() {
         <button onClick={() => getSheet()}>get spreadsheet data</button>
       </div>
       <div>
-        <DynamicTable columns={tablecolumns} data={tabledata} />
+        <DynamicTable
+          columns={tablecolumns}
+          data={tabledata}
+          searchString="7"
+        />
       </div>
     </>
   );
