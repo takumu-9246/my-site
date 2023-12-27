@@ -37,6 +37,15 @@ class SpreadSheetController {
       ?.getRange(row, column, numRows, numColumns)
       .getValues();
   }
+
+  public getLastRow(){
+    return this.spreadsheet.getLastRow()
+  }
+
+  public getLastColumn(){
+    return this.spreadsheet.getLastColumn()
+  }
+
 }
 
 function getAllValuesBySheet(sheetId: string, sheetName: string) {
@@ -69,10 +78,4 @@ function convertDatesToStrings(array: Array<Array<any>> | undefined) {
       return element;
     });
   });
-}
-
-function test() {
-  console.log(
-    getAllValuesBySheet("1Ak4WKTiBghdClIAyWsofq3JEhRimsuWtwyDrKXxFUhQ", "日記")
-  );
 }
