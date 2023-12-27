@@ -25,6 +25,12 @@ class SpreadSheetController {
         var _a;
         return (_a = this.activeSheet) === null || _a === void 0 ? void 0 : _a.getRange(row, column, numRows, numColumns).getValues();
     }
+    getLastRow() {
+        return this.spreadsheet.getLastRow();
+    }
+    getLastColumn() {
+        return this.spreadsheet.getLastColumn();
+    }
 }
 function getAllValuesBySheet(sheetId, sheetName) {
     const ss = new SpreadSheetController(sheetId, sheetName);
@@ -47,7 +53,4 @@ function convertDatesToStrings(array) {
             return element;
         });
     });
-}
-function test() {
-    console.log(getAllValuesBySheet("1Ak4WKTiBghdClIAyWsofq3JEhRimsuWtwyDrKXxFUhQ", "日記"));
 }
